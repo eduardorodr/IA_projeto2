@@ -10,4 +10,5 @@ kagglehub
 tensorflow
 tf
 matplotlib
-PIL
+pillow
+pil
