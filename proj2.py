@@ -26,7 +26,7 @@ model = keras.saving.load_model("modelo.keras")
 # Tituo do projeto e sidebar
 st.title("Classificador de Frutas - CNN")
 st.sidebar.title("Menu")
-selecao = st.sidebar.radio("Navegue pelo projeto:", ["Descrição do Projeto", "Classificação de Frutas", "Estatísticas","Conclusão"])
+selecao = st.sidebar.radio("Navegue pelo projeto:", ["Descrição do Projeto", "Classificação de Frutas", "Desempenho","Conclusão"])
 ##
 
 # Seção de Descrição do Projeto
@@ -35,21 +35,35 @@ if selecao == "Descrição do Projeto":
 
     # Introdução 
     st.subheader("Introdução")
-    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod lacus at tellus volutpat, sed vestibulum eros rhoncus. Aliquam erat volutpat.'        
-        ,'Quisque id ex ante. Nunc in ante sed diam varius suscipit. Morbi ipsum sapien, consequat et luctus sed, faucibus in metus. Integer mollis laoreet commodo. '
-    )
+    st.write('''
 
-    # Escolha do tema e objetivos
-    st.subheader("Escolha do tema e objetivos")
-    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod lacus at tellus volutpat, sed vestibulum eros rhoncus. Aliquam erat volutpat.'        
-        ,'Quisque id ex ante. Nunc in ante sed diam varius suscipit. Morbi ipsum sapien, consequat et luctus sed, faucibus in metus. Integer mollis laoreet commodo. '
-    )
+            Este trabalho foi desenvolvido como segunda avaliação da disciplina de
+            Inteligência Artificial, para solidificar, exercitar e exemplificar os
+            conhecimentos que foram obtidos ao longo do semestre, principalmente os
+            que tocam em classificação, modelos de redes neurais, interpretação de
+            datasets, linguagem python e suas bibliotecas e publicação de aplicações.
+            O tema deste projeto, a Classificação de Frutas utilizando imagens, foi
+            escolhido tendo em vista a proximidade com temas e aplicações dados de
+            exemplo durante as aulas e a grande disponibilidade de material, tanto em
+            dados (imagens de frutas) quanto documentação do uso de imagens de frutas
+            em modelos de classificação.\n
+            O modelo escolhido, CNN (Redes Neurais Convolucionais) é
+            amplamente utilizado na classificação com imagens, é extremamente
+            documentado e explorado nas comunidades de desenvolvedores de machine
+            learning. Utilizando bibliotecas que possuem o modelo já implementado, é
+            possível adaptá-lo para classificar frutas com facilidade e em poucas etapas.\n
+            O dataset escolhido é pouco representativo pelo seu pequeno número
+            de amostras, mas os resultados apresentados foram satisfatórios, dado que a
+            escolha do conjunto de dados foi condicionada às limitações de hardware do
+            computador onde o modelo foi treinado. Posteriormente neste relatório serão
+            abordados os problemas que foram encontrados durante o desenvolvimento
+            relacionados a hardware.
 
-    # Escolha do modelo e explicação basica do modelo
-    st.subheader("Modelo escolhido")
-    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod lacus at tellus volutpat, sed vestibulum eros rhoncus. Aliquam erat volutpat.'        
-        ,'Quisque id ex ante. Nunc in ante sed diam varius suscipit. Morbi ipsum sapien, consequat et luctus sed, faucibus in metus. Integer mollis laoreet commodo. '
-    )
+    ''')
+
+    img_banner = Image.open("frutas.jpg")
+    img_banner = img_banner.resize([1000,400],3)
+    st.image(img_banner)
 
 ##
 
@@ -106,6 +120,15 @@ elif selecao == "Classificação de Frutas":
         model.save("modelo.keras")
     
     '''
+
+    st.write(''' Download do modelo ''')
+    img_banner = Image.open("modelo.PNG")
+    st.image(img_banner)
+
+    st.write(''' Treino ''')
+    img_banner = Image.open("treino.PNG")
+    st.image(img_banner)
+
     st.code(code, language="python")
 
     amostra = st.file_uploader("Amostra de Fruta", type=None, accept_multiple_files=False, key=None, 
@@ -132,17 +155,39 @@ elif selecao == "Classificação de Frutas":
     
 ##
 
-# Seção de Estatísticas // exibir graficos de acurácia e perda do modelo
-elif selecao == "Estatísticas":
+# Seção de Desempenho // exibir graficos de acurácia e perda do modelo
+elif selecao == "Desempenho":
     
-    st.header("Estatísticas")
+    st.header("Desempenho")
 
+    img_banner = Image.open("acu.PNG")
+    st.image(img_banner)
+
+    img_banner = Image.open("loss.PNG")
+    st.image(img_banner)
+
+    st.write('''
+
+        O desempenho do modelo foi analisado sob diferentes configurações de arquitetura: diferentes tamanhos de batch, número de épocas,
+        taxas de aprendizado e número de camadas. A maior acurácia foi 0.95, embora na comunidade do Kaggle outros usuários tenham alcançado 
+        cerca de 0.98 de acurácia ainda usando o CNN.
+             
+    ''')
 
 ##
 # Seção de Conclusão // comentar a respeito das dificuldades, resultados esperados e obtidos
 else:
     
     st.header("Conclusão")
+    st.subheader("Pinneaple??")
 
+    img_banner = Image.open("abacaxi.PNG")
+    st.image(img_banner)
+
+    st.write('''
+
+        Uma amostra pouco representativa pode gerar resultados inesperados!
+             
+    ''')
 
 ##

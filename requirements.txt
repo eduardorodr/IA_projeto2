@@ -8,5 +8,6 @@ numpy
 keras
 kagglehub
 tensorflow
+tf
 matplotlib
 PIL
